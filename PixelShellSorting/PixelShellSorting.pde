@@ -155,7 +155,9 @@ void draw() {
         //we will call these pixels exchanges during the draw loop for the real sorted.pixels array
         stackcalls.add(new int[]{j, temp_pix});
       }
+      //generate new gap
       gap /= 2; //replaced --> for (int gap = arrayLength / 2; gap > 0; gap /= 2)
+      
     } else {
       //use the stackcalls queue to do the pixel changes in the canvas display
       int[] pix = stackcalls.remove();

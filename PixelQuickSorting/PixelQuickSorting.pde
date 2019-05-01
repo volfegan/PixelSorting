@@ -14,7 +14,7 @@ String sortPixelMethod = "hue";
 
 
 //used to control speed of sorting process
-int multiStep = 1;
+int multiStep = 1; //after 5s will change to 1000 steps
 long startTime = 0;
 
 //Create a queue stack to hold the quicksort indices to control the recursive calls

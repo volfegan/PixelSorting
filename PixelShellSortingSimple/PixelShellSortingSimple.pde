@@ -133,6 +133,7 @@ void draw() {
       }
       sorted.pixels[j] = temp_pix;
     }
+    //generate new gap
     gap /= 2; //replaced --> for (int gap = arrayLength / 2; gap > 0; gap /= 2)
   }
 
