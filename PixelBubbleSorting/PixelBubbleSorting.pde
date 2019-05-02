@@ -135,7 +135,7 @@ void draw() {
     }
   }
   //Show framerate on display
-  if (index > multiStep+1) {
+  if (index > multiStep*2) {
     text("Buble sort: "+String.format("%.2f", frameRate) + 
     " frameRate / steps: " + (index) + " / sort by " + sortPixelMethod, 0, 18);
   }
