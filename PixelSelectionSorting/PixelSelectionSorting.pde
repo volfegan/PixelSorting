@@ -123,14 +123,14 @@ void draw() {
   } else {
     //original img 20% in the corner
     image(sorted, 0, 0);
-    if (index > multiStep*2) {
+    if (index < sorted.pixels.length - multiStep) {
       tint(255, 190);  // Apply transparency without changing color
       image(img, 0, 0.8* img.height, 0.2* img.width, 0.2* img.height);
       noTint();
     }
   }
   //Show framerate on display
-  if (index > multiStep * 2) {
+  if (index < sorted.pixels.length - multiStep) {
     text("Selection sort: " +String.format("%.2f", frameRate) + 
       " frameRate / steps: " + (sorted.pixels.length - index) + " / sort by " + sortPixelMethod, 0, 18);
   }
