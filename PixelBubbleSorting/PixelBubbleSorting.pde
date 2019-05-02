@@ -128,7 +128,7 @@ void draw() {
   } else {
     //original img 20% in the corner
     image(sorted, 0, 0);
-    if (index > 1) {
+    if (index > multiStep*2) {
       tint(255, 130);  // Apply transparency without changing color
       image(img, 0, 0.8* img.height, 0.2* img.width, 0.2* img.height);
       noTint();

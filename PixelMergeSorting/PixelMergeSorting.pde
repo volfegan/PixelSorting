@@ -115,8 +115,12 @@ void draw() {
 
   //multiStep during each loop for faster sort
   for (int steps = 0; steps < multiStep; steps++) {
-    //slow down for better visualization
-    if (division > 2 && multiStep > 500) multiStep = multiStep/2;
+    
+    //slow down multiStep for better visualization
+    if (division > 2 && multiStep > 1000) multiStep /= 2;
+    else if (division > 2 && multiStep < 1000) multiStep = 1000;
+    else if (division > 32 && multiStep <= 1000) multiStep = 500;
+    else if (division > 64 && multiStep <= 500) multiStep = 100;
 
     //control the Iterative mergesort calls using the stackcalls queue
     if (stackcalls.isEmpty()) {
