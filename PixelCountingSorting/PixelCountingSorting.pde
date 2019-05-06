@@ -1,25 +1,28 @@
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Map;
 
 PImage img;
 PImage sorted;
-PImage dummy; //copy of sorted.pixels and used to get each step of pixel sorting
-int gap = 0;
 int width = 0;
 int height = 0;
 
 
 boolean showBothIMGs = false; //to show both imgs side by side, only sorted img
-//select how to sort the pixels by hue or brightness
+//Counting sort can only sort integers so only colour hue is available
+//pixels brightness gives an float number and at the moment I not really into
+//finding a brightness or luminance equation that spillls integers only
 String sortPixelMethod = "hue";
-//String sortPixelMethod = "brightness";
 
 
 //used to control speed of sorting process
-int multiStep = 5000;
+int multiStep = 1;
 
-//Create a queue stack to hold the exchanged pixel indexes & colours from the while loop dummy calls
-Queue<int[]> stackcalls = new LinkedList();
+// Buckets: key is the hue colour 0~360 and the Queue are each pixels with that hue
+HashMap<Integer, Queue<Integer>> counter;
+int bucket = 0; // index for each counter bucket
+int index = 0; // index of the pixel array
+int hueColours = 360;
 
 String filename;
 //there is no file validation, so any non-img selected will crash the program
@@ -76,6 +79,7 @@ void settings() {
 
 void setup() {
   textSize(18);
+  colorMode(HSB, hueColours, 100, 100);
   sorted = createImage(img.width, img.height, HSB);
   sorted = img.get();
 
@@ -88,78 +92,42 @@ void setup() {
     image(sorted, 0, 0);
   }
 
-  gap = sorted.pixels.length/2; //replaced on draw() --> for (int gap = arrayLength / 2; gap > 0; gap /= 2)
-  //dummy image to be sorted and steps extracted to be recreated on draw loop
-  dummy = createImage(img.width, img.height, HSB);
-  dummy = img.get();
+  // http://www.java67.com/2017/06/counting-sort-in-java-example.html 
+  // Counting Sort function to sort arr[0...n-1]
+  // create buckets; key is the hue colour 0~360 and the Queue are each pixels with that hue
+  counter = new HashMap<Integer, Queue<Integer>>(hueColours);
+  // fill buckets 
+  for (int pix : sorted.pixels) {
+    Queue<Integer> pixList = new LinkedList(); //to store same colour hue pixels
+    int colour = Math.round(hue(pix));
+    if (counter.containsKey(colour)) pixList = counter.get(colour);
+    pixList.add(pix);
+    counter.put(Math.round(hue(pix)), pixList);
+  }
+  index = img.pixels.length-1;
 }
 
 void draw() {
   //show frame rate and current gap/pixels size
-  println("Shell sort: " +String.format("%.2f", frameRate) + "frameRate\t gap: " 
-    + gap + " / steps: " + stackcalls.size());
+  println("Counting sort: " +String.format("%.2f", frameRate) + "frameRate\t / steps: " + index);
 
   sorted.loadPixels();
 
   //just to have some time to show the img
-  if (gap == sorted.pixels.length/2) {
-    delay(2000);
+  if (index == sorted.pixels.length-1) {
+    delay(3000);
   }
-  //saveFrame("frames/"+filename+System.currentTimeMillis()+".png");
 
   //multiStep during each loop for faster sort
   for (int n = 0; n < multiStep; n++) {
 
-    if (stackcalls.isEmpty()) {
-
-      // Shell sort!
-      //https://www.code2bits.com/shell-sort-algorithm-in-java/
-      if (gap == 0) break; //replaced --> for (int gap = arrayLength / 2; gap > 0; gap /= 2)
-
-      for (int i = gap; i < dummy.pixels.length; i++) {
-        color temp_pix = dummy.pixels[i];
-        float tempValue = 0;
-
-        int j = i;
-
-        //sort either by hue or brightness;
-        if (sortPixelMethod.equals("brightness")) {
-          tempValue = brightness(temp_pix);
-
-          while (j >= gap && brightness(dummy.pixels[j - gap]) < tempValue) {
-
-            //we will call these pixels exchanges during the draw loop for the real sorted.pixels array
-            stackcalls.add(new int[]{j, color(dummy.pixels[j - gap])});
-
-            dummy.pixels[j] = dummy.pixels[j - gap];
-            j -= gap;
-          }
-        } else if (sortPixelMethod.equals("hue")) {
-          tempValue = hue(temp_pix);
-
-          while (j >= gap && hue(dummy.pixels[j - gap]) < tempValue) {
-
-            //we will call these pixels exchanges during the draw loop for the real sorted.pixels array
-            stackcalls.add(new int[]{j, color(dummy.pixels[j - gap])});
-
-            dummy.pixels[j] = dummy.pixels[j - gap];
-            j -= gap;
-          }
-        }
-        dummy.pixels[j] = temp_pix;
-        //we will call these pixels exchanges during the draw loop for the real sorted.pixels array
-        stackcalls.add(new int[]{j, temp_pix});
+    // sort array 
+    if (bucket < hueColours) {
+      while (counter.containsKey(bucket) && !counter.get(bucket).isEmpty()) { 
+        sorted.pixels[index--] = counter.get(bucket).remove();
       }
-      //generate new gap
-      gap /= 2; //replaced --> for (int gap = arrayLength / 2; gap > 0; gap /= 2)
-      
-    } else {
-      //use the stackcalls queue to do the pixel changes in the canvas display
-      int[] pix = stackcalls.remove();
-      int index = pix[0];
-      color pixcolor = pix[1];
-      sorted.pixels[index] = pixcolor;
     }
+    bucket++;
   }
 
   //show sorted pixels img so far
@@ -171,17 +139,17 @@ void draw() {
     image(sorted, img.width, 0);
   } else {
     image(sorted, 0, 0);
-    if (gap > 1) {
+    if (index > multiStep*2) {
       tint(255, 190);  // Apply transparency without changing color
       image(img, 0, 0.8* img.height, 0.2* img.width, 0.2* img.height);
       noTint();
     }
   }
   //Show framerate on display
-  if (gap > 1) {
-    text("Shell sort: "+String.format("%.2f", frameRate) + 
-      " frameRate / gap: " + gap +" / steps: "+ stackcalls.size() + " / sort by " + sortPixelMethod, 0, 18);
-  } else if (gap <= 1 && stackcalls.isEmpty()) {
+  if (index > multiStep*2) {
+    text("Counting sort: "+String.format("%.2f", frameRate) + 
+      " frameRate / steps: " + index + " / sort by " + sortPixelMethod, 0, 18);
+  } else {
     noLoop();
     save(filename+"_PixelsSortedBy_"+sortPixelMethod+".jpg");
     println("pixels sorting complete");
