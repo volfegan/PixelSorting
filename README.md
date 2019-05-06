@@ -76,8 +76,25 @@ Now compare the same image sorted respectively by quicksort and shellsort:
 ![sunflower Pixels Sorted By brightness shellsort](PixelShellSortingSimple/sunflower400_PixelsSortedBy_brightness.jpg)
 
 You can see that the image from quicksort and shellsort are different from the stable sorters and also different from each other.
-I hope this was interesting.
 
+                   __________________________
+                  /                           \
+                 |I hope this was interesting. |
+                 \__   __ __ __ __ __ __ __ __/
+                    | /
+             __w    |/
+     (\{\  ,%%%%            .-.   __
+     { { \.%%%_/   ,_*   _ /   \ /  \
+     { {  \%%/(___//    / \|   |/   |
+     { {\,%%%|[))-'    :   \   /  _/_
+     {/{/\,%%)\(       _\_  \_|_.'   '.
+           '%]\\      :   '-(  )_____.'
+             ((']       '.__/'--\   \
+              \yI\         /  |  \   )
+             (/  (\       /   /  |'-:
+             7    k\      '--'\__/ \ \
+            J'    `L_               \ \
+                                     \ \
 \- \- \-
 
 \[ all code available under MIT License - feel free to use. \]
