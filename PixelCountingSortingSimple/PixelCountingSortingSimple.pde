@@ -15,6 +15,7 @@ long startTime = 0; //measure the speed of sorting process
 //pixels brightness gives an float number and at the moment I not really into
 //finding a brightness or luminance equation that spillls integers only
 String sortPixelMethod = "hue";
+int hueColours = 360;
 
 
 String filename;
@@ -68,7 +69,7 @@ void settings() {
 }
 
 void setup() {
-  colorMode(HSB, 360, 100, 100);
+  colorMode(HSB, hueColours, 100, 100);
   sorted = createImage(img.width, img.height, HSB);
   sorted = img.get();
   background(0);
@@ -83,7 +84,6 @@ void draw() {
 
   if (started == false) {
     started = true;
-    int hueColours = 360;
     countingSort(sorted.pixels, hueColours);
   }
 
@@ -107,7 +107,7 @@ void draw() {
  * @param int k size of the bucket (for hue its 360 colours)
  */
 public void countingSort(int[] arr, int k) { 
-  // create buckets; key is the hue colour 0~360 and the Queue are each pixels with that hue
+  // create buckets; key is the hue colour 0~359 and the Queue are each pixels with that hue
   HashMap<Integer, Queue<Integer>> counter = new HashMap<Integer, Queue<Integer>>(k);
 
   // fill buckets 
@@ -115,6 +115,7 @@ public void countingSort(int[] arr, int k) {
     Queue<Integer> pixList = new LinkedList(); //to store same colour hue pixels
     //println("hue(pix)="+hue(pix)+"; brightness(pix)="+brightness(pix));
     int colour = Math.round(hue(pix));
+    if (colour >= k) colour=k-1; //max must be hue=359
     if (counter.containsKey(colour)) pixList = counter.get(colour);
     pixList.add(pix);
     counter.put(Math.round(hue(pix)),pixList);

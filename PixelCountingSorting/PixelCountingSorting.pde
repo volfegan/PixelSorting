@@ -18,7 +18,7 @@ String sortPixelMethod = "hue";
 //used to control speed of sorting process
 int multiStep = 1;
 
-// Buckets: key is the hue colour 0~360 and the Queue are each pixels with that hue
+// Buckets: key is the hue colour 0~359 and the Queue are each pixels with that hue
 HashMap<Integer, Queue<Integer>> counter;
 int bucket = 0; // index for each counter bucket
 int index = 0; // index of the pixel array
@@ -70,7 +70,6 @@ void settings() {
     img.resize(width, height);
   }
 
-
   //the canvas window size will be according to the img size
   if (showBothIMGs && 2 * img.width < displayWidth)
     width = img.width * 2; //show both original and sorted pics if display is big enough
@@ -94,12 +93,13 @@ void setup() {
 
   // http://www.java67.com/2017/06/counting-sort-in-java-example.html 
   // Counting Sort function to sort arr[0...n-1]
-  // create buckets; key is the hue colour 0~360 and the Queue are each pixels with that hue
+  // create buckets; key is the hue colour 0~359 and the Queue are each pixels with that hue
   counter = new HashMap<Integer, Queue<Integer>>(hueColours);
   // fill buckets 
   for (int pix : sorted.pixels) {
     Queue<Integer> pixList = new LinkedList(); //to store same colour hue pixels
     int colour = Math.round(hue(pix));
+    if (colour >= hueColours) colour=hueColours-1; //max must be hue=359
     if (counter.containsKey(colour)) pixList = counter.get(colour);
     pixList.add(pix);
     counter.put(Math.round(hue(pix)), pixList);
@@ -115,7 +115,7 @@ void draw() {
 
   //just to have some time to show the img
   if (index == sorted.pixels.length-1) {
-    delay(3000);
+    delay(2000);
   }
 
   //multiStep during each loop for faster sort
@@ -126,8 +126,8 @@ void draw() {
       while (counter.containsKey(bucket) && !counter.get(bucket).isEmpty()) { 
         sorted.pixels[index--] = counter.get(bucket).remove();
       }
+      bucket++;
     }
-    bucket++;
   }
 
   //show sorted pixels img so far
@@ -149,7 +149,9 @@ void draw() {
   if (index > multiStep*2) {
     text("Counting sort: "+String.format("%.2f", frameRate) + 
       " frameRate / steps: " + index + " / sort by " + sortPixelMethod, 0, 18);
-  } else {
+  }
+
+  if (index < 1) {
     noLoop();
     save(filename+"_PixelsSortedBy_"+sortPixelMethod+".jpg");
     println("pixels sorting complete");
