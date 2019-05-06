@@ -18,7 +18,7 @@ Most of the processing sketches have the following variables to control the visu
 
 \- \- \-
 
-Bellow there are the links of video examples for each visualizations method (GIF images were too big to put here). It also mentions if that sorting method is stable or not. Stable sort algorithms sort repeated elements in the same order that they appear in the input. We can actually see the differences between a stable sorting and an unstable just by see the pixels arrangement. This is evident on the images on the final part.
+Bellow there are the links of video examples for each visualizations method (GIF images were too big to put here). It also mentions if that sorting method is stable or not. Stable sort algorithms sort repeated elements in the same order that they appear in the input. We can actually see the differences between a stable sorting and an unstable just by see the pixels arrangement. This is evident on the images on the bottom of the page.
 
 |  *Simple sort* |
 |     :---:      |
@@ -60,6 +60,11 @@ Stable: Yes
 Stable: No
 
 [![Pixel Heap Sorting on cat](https://i.ytimg.com/vi/Vb2jU7L__Ho/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLArpqIYRhPqXsNrBKA8VScBA_1grw)](https://www.youtube.com/watch?v=Vb2jU7L__Ho)
+
+#### Pixel Counting Sorting
+Stable: Yes
+
+[![Pixel Counting Sorting on cat](https://i.ytimg.com/vi/6Qgppldl4F8/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBbsIWuHTrAWHb-f6HttK_A6Yf1lA)](https://www.youtube.com/watch?v=6Qgppldl4F8)
 
 \- \- \-
 
