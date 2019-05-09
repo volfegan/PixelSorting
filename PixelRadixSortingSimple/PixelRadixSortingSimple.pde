@@ -84,7 +84,7 @@ void draw() {
 
   if (started == false) {
     started = true;
-    countingSort(sorted.pixels, hueColours);
+    radixLSDsort(sorted.pixels);
   }
 
   //show sorted pixels img
@@ -100,31 +100,55 @@ void draw() {
   }
 }
 
-/* http://www.java67.com/2017/06/counting-sort-in-java-example.html 
- * Counting Sort function to sort arr[0...n-1]
+/* https://en.wikipedia.org/wiki/Radix_sort#Implementation_in_java
+ * https://www.growingwiththeweb.com/sorting/radix-sort-lsd/
+ * 
+ * LSD (least significant digit) Radix Sort function to sort arr[0...n-1]
+ * Radix used is base 10
+ * @param int[] arr to be of sorted
+ */
+public void radixLSDsort(int[] arr) {
+
+  // Find the maximum hue Colour pixel from the img
+  int maxHue = 0;
+  for (int pix : arr) {
+    if (maxHue < hue(pix))
+      maxHue = Math.round(hue(pix));
+  }
+  // Do counting sort for every digit for the select digit position given by exp (10^i)
+  for (int exp = 1; maxHue/exp > 0; exp *= 10) 
+    countingSortByDigit(arr, exp);
+}
+
+/*
+ * Counting Sort according to the digit exp (10^i).
  *
  * @param int[] arr to be of sorted
- * @param int k size of the bucket (for hue its 360 colours)
+ * @param int exp order of digit to sort (10^i)
  */
-public void countingSort(int[] arr, int k) { 
-  // create buckets; key is the hue colour 0~359 and the Queue are each pixels with that hue
-  HashMap<Integer, Queue<Integer>> counter = new HashMap<Integer, Queue<Integer>>(k);
+public void countingSortByDigit(int[] arr, int exp) {
+  int radix = 10; //using base 10
+  // Initialize buckets; 
+  //key is the radix base number [0~9] and the Queue are pixels with hue value for the selected exp digit
+  HashMap<Integer, Queue<Integer>> counter = new HashMap<Integer, Queue<Integer>>(radix);
 
-  // fill buckets 
+  // fill buckets by counting of occurrences of pixels with same exp digit
   for (int pix : arr) {
-    Queue<Integer> pixList = new LinkedList(); //to store same colour hue pixels
-    //println("hue(pix)="+hue(pix)+"; brightness(pix)="+brightness(pix));
+    Queue<Integer> pixList = new LinkedList(); //to store same exp digit pixels
     int colour = Math.round(hue(pix));
-    if (colour >= k) colour=k-1; //max must be hue=359
-    if (counter.containsKey(colour)) pixList = counter.get(colour);
+    if (colour > 359) colour=359; //max must be hue=359
+
+    int  bucket = (int)((colour / exp) % radix); // index for each counter [0~9]
+    //println("hue(pix)="+colour+"; bucket="+bucket);
+    if (counter.containsKey(bucket)) pixList = counter.get(bucket);
     pixList.add(pix);
-    counter.put(colour,pixList);
+    counter.put(bucket, pixList);
   }
-  // sort array 
-  int ndx = arr.length-1; 
-  for (int i = 0; i < k; i++) { 
-    while (counter.containsKey(i) && !counter.get(i).isEmpty()) { 
-      arr[ndx--] = counter.get(i).remove();
+  // sort array
+  int ndx = 0; 
+  for (int bucket = radix-1; bucket >= 0; bucket--) { 
+    while (counter.containsKey(bucket) && !counter.get(bucket).isEmpty()) { 
+      arr[ndx++] = counter.get(bucket).remove();
     }
   }
-} 
+}
