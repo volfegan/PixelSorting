@@ -66,6 +66,11 @@ Stable: Yes
 
 [![Pixel Counting Sorting on cat](https://i.ytimg.com/vi/6Qgppldl4F8/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBbsIWuHTrAWHb-f6HttK_A6Yf1lA)](https://www.youtube.com/watch?v=6Qgppldl4F8)
 
+#### Pixel Radix LSD (least significant digit) Sorting
+Stable: Yes
+
+[![Pixel Radix LSD (least significant digit) Sorting on cat](https://i.ytimg.com/vi/InzY4zrw5Jg/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCc_9tlkxToRrfpse3Oc5QCbWUoOg)](https://www.youtube.com/watch?v=InzY4zrw5Jg)
+
 \- \- \-
 
 \[ Visualizing a stable sort against an unstable \]
