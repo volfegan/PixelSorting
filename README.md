@@ -5,12 +5,12 @@ A set of pixel sorting visualization using different methods on Processing.
 This is my attempt to learn those sorting algorithm, but with something aesthetically pleasing. Those sketches with "Simple" on its name are the 1st attempt to understand the pixel sorting process and don't have or have limited visualization.
 Since we are talking about sorting pixels, there are lots of ways in doing that:
 - you can sort by hue, brightness, by the colour channel, saturation (HSB colour mode). So far I only did for hue and brightness.
-- you can sort just like above and with any sorting method, but instead of sorting all the pixels of the images, sort line by line separated, either horizontally or vertically or a combination of those. This is the simpler version, sorted the whole pixels.
+- you can sort just like above and with any sorting method, but instead of sorting all the pixels of the images, it can be done by sorting line by line separated, either horizontally or vertically or a combination of those, just a section of the image. In fact, there are a lot of crazy ways to sort pixels. Imagination, time and knowledge are the only restriction.
 
 \- \- \-
 
 #### Basic setup and config
-Most of the processing sketches have the following variables to control the visualization and sorting.
+Most of the processing sketches have the following variables to control the visualization and sorting. Each have their own option variables and they are at the start of the sketch.
 
 * boolean showBothIMG -> can be either "true" or "false"; If true, it shows both imgs side by side, otherwise it only shows the sorted img with the original image in the corner reduced to 20% the size. If the image is bigger than the device's screen, it will rescale the image to 80% of the screen.
 * String sortPixelMethod -> can be either "hue" or "brightness". As the name sugests the user can select how to sort the pixels by hue or brightness
@@ -70,6 +70,16 @@ Stable: Yes
 Stable: Yes
 
 [![Pixel Radix LSD (least significant digit) Sorting on cat](https://i.ytimg.com/vi/InzY4zrw5Jg/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCc_9tlkxToRrfpse3Oc5QCbWUoOg)](https://www.youtube.com/watch?v=InzY4zrw5Jg)
+
+| *Extra sorting stuff* |
+|         :---:         |
+
+#### controlled Pixel Sorting by each horizontal line
+Each line is individually sorted using quicksort. It chooses how the line is sorted, the direction of sorting and how much of the line must be sorted using quicksort lower and higher indexes parameter variables. The sorting can be controlled by mouse or put in autoloop, where it will use all the sorting direction and sorting methods (hue or brightness) for each cycle.
+
+Stable: No (quicksort)
+
+[![Pixel Sorting visualization for each horizontal line individually on cat](https://i9.ytimg.com/vi_webp/nbwTPSIpjGw/hqdefault.webp?v=5ce5c413&sqp=CLiRl-cF&rs=AOn4CLDoo9SL7Wrpuhy297Hi5hkE2bArdA)](https://www.youtube.com/watch?v=nbwTPSIpjGw)
 
 \- \- \-
 
