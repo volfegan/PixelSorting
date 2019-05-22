@@ -77,7 +77,7 @@ void draw() {
   
   if (stop == 0) {
     stop++;
-    quickSort(0, sorted.pixels.length-1);
+    quickSort(sorted.pixels, 0, sorted.pixels.length-1, sortPixelMethod);
   }
   
   //show sorted pixels img
@@ -94,20 +94,20 @@ void draw() {
 }
 
 //http://www.java2novice.com/java-sorting-algorithms/quick-sort/
-void quickSort(int lowerIndex, int higherIndex) {
+void quickSort(int[] array, int lowerIndex, int higherIndex, String sortPixelMethod) {
   float pivotPix = 0;
   int i = lowerIndex;
   int j = higherIndex;
   // calculate pivot number, I am taking pivot as middle index number
-  int pivot = sorted.pixels[lowerIndex+(higherIndex-lowerIndex)/2]; //pixel values
-  
+  int pivot = array[lowerIndex+(higherIndex-lowerIndex)/2]; //pixel values
+
   //sort either by hue or brightness;
   if (sortPixelMethod.equals("brightness")) pivotPix = brightness(pivot);
   else if (sortPixelMethod.equals("hue")) pivotPix = hue(pivot);
-  
+
   // Divide into two sorted.pixels arrays
   while (i <= j) {
-    
+
     /**
      * In each iteration, we will identify a number from left side which 
      * is greater then the pivot value, and also we will identify a number 
@@ -116,34 +116,32 @@ void quickSort(int lowerIndex, int higherIndex) {
      */
     //sort either by hue or brightness;
     if (sortPixelMethod.equals("brightness")) {
-      
-      while (brightness(sorted.pixels[i]) > pivotPix) i++;
-      while (brightness(sorted.pixels[j]) < pivotPix) j--;
-      
+
+      while (brightness(array[i]) > pivotPix) i++;
+      while (brightness(array[j]) < pivotPix) j--;
     } else if (sortPixelMethod.equals("hue")) {
-      
-      while (hue(sorted.pixels[i]) > pivotPix) i++;
-      while (hue(sorted.pixels[j]) < pivotPix) j--;
-      
+
+      while (hue(array[i]) > pivotPix) i++;
+      while (hue(array[j]) < pivotPix) j--;
     }
     if (i <= j) {
-        exchangePixel(i, j);
-        //move index to next position on both sides
-        i++;
-        j--;
+      exchangePixel(array, i, j);
+      //move index to next position on both sides
+      i++;
+      j--;
     }
   }
   // call quickSort() method recursively
   if (lowerIndex < j) {
-      quickSort(lowerIndex, j);
+    quickSort(array, lowerIndex, j, sortPixelMethod);
   }
   if (i < higherIndex) {
-      quickSort(i, higherIndex);
+    quickSort(array, i, higherIndex, sortPixelMethod);
   }
 }
 
-void exchangePixel(int i, int j) {
-  color temp = sorted.pixels[i];
-  sorted.pixels[i] = sorted.pixels[j];
-  sorted.pixels[j] = temp;
+void exchangePixel(int[] array, int i, int j) {
+  color temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
 }
