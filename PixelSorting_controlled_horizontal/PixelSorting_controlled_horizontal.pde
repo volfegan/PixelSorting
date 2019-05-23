@@ -13,7 +13,7 @@ long startTime = 0;
 String[] sort_dir = new String[] {"defaut", "->", "~>", "<-", "<~", "<-|->", "<~|~>", "static glitch"};
 
 
-int multiStep = 5; //increase multistep for faster animation
+int multiStep = 5; //increase multistep for faster animation on autoloop
 /* Direction on which the sorting moves:
  * 0: defaut
  * 1: ->
