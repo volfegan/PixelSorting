@@ -79,7 +79,7 @@ Each line is individually sorted using quicksort. It chooses how the line is sor
 
 Stable: No (quicksort)
 
-[![Pixel Sorting visualization for each horizontal line individually on cat](https://i9.ytimg.com/vi_webp/nbwTPSIpjGw/hqdefault.webp?v=5ce5c413&sqp=CLiRl-cF&rs=AOn4CLDoo9SL7Wrpuhy297Hi5hkE2bArdA)](https://www.youtube.com/watch?v=nbwTPSIpjGw)
+[![Pixel Sorting visualization for each horizontal line individually on cat](https://i.ytimg.com/vi/nbwTPSIpjGw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDzlJEe0GsS5CBZLwoVuYF1rYU-_A)](https://www.youtube.com/watch?v=nbwTPSIpjGw)
 
 \- \- \-
 
