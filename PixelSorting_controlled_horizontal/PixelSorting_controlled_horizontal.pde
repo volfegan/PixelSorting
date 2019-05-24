@@ -111,7 +111,7 @@ void move_by(boolean mouseControl) {
       //Check on boundaries when to reverse walk
       if (moveX >= img.width-1) moveFoward = false;
       if (moveX <= 0) moveFoward = true;
-      if (moveY >= img.width-1) moveDown = false;
+      if (moveY >= img.height-1) moveDown = false;
       if (moveY <= 0) moveDown = true;
 
       //change sorting method and direction of sort every finish pass
@@ -151,7 +151,7 @@ void draw() {
   //show frame rate and current sorting step
   println("Sorting horizontal lines ("+sort_dir[Sorting_direction]+"): " + 
     String.format("%.2f", ( ((float)moveX)/(img.width-1) )*100) + "% / " +
-    String.format("%.2f", frameRate) + " frameRate");
+    String.format("%.2f", frameRate) + " frameRate"+" x="+moveX+" y="+moveY);
   sorted.loadPixels();
 
   //loop by each row
@@ -169,12 +169,12 @@ void draw() {
 
       switch(Sorting_direction) {
       case 1 :
-        //sorting from right to left simple: [->]
+        //sorting from left to right simple: [->]
         lowerIndex = 0;
         higherIndex = moveX;
         break;
       case 2 :
-        //sorting from right to left complex: [glitch->]
+        //sorting from left to right complex: [glitch->]
         lowerIndex = 0;
         if (random(0, 1) > 0.7 && moveX > row.length/3) {
           higherIndex = moveX + round(h*random(0, 1));
@@ -182,12 +182,12 @@ void draw() {
         }
         break;
       case 3 :
-        //sorting from left to right simple: [<-]
+        //sorting from right to left simple: [<-]
         lowerIndex = row.length-1 - moveX;
         higherIndex = row.length-1;
         break;
       case 4 :
-        //sorting from left to right complex: [<-glitch]
+        //sorting from right to left complex: [<-glitch]
         lowerIndex = row.length-1 - moveX;
         if (random(0, 1) > 0.7 && moveX > row.length/5) {
           lowerIndex = row.length-1 - moveX - round(h*random(0, 1));
