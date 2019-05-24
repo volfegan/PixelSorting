@@ -65,7 +65,6 @@ void settings() {
   //for testing
   //img = loadImage("sunflower400.jpg");
   width = img.width;
-  //width = img.width * 2; If want to show both original and sorted pics
   height = img.height;
 
   //the canvas window size will be according to the img size
