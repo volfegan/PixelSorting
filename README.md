@@ -74,12 +74,21 @@ Stable: Yes
 | *Extra sorting stuff* |
 |         :---:         |
 
-#### controlled Pixel Sorting by each horizontal line
-Each line is individually sorted using quicksort. It chooses how the line is sorted, the direction of sorting and how much of the line must be sorted using quicksort lower and higher indexes parameter variables. The sorting can be controlled by mouse or put in autoloop, where it will use all the sorting direction and sorting methods (hue or brightness) for each cycle.
+#### Controlled Pixel Sorting by each horizontal line
+Each line is individually sorted using quicksort. It chooses how the line is sorted, the direction of sorting and how much of the line must be sorted using quicksort lower and higher indexes parameter variables. The sorting can be controlled by mouse movements over the image or put in autoloop, where it will use all the sorting direction and sorting methods (hue or brightness) for each cycle.
+
+To save an image at any point just press ' ' (space bar).
 
 Stable: No (quicksort)
 
 [![Pixel Sorting visualization for each horizontal line individually on cat](https://i.ytimg.com/vi/nbwTPSIpjGw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDzlJEe0GsS5CBZLwoVuYF1rYU-_A)](https://www.youtube.com/watch?v=nbwTPSIpjGw)
+
+#### Controlled Pixel Sorting by each vertical line
+Basically the same as above is applied here.
+
+Stable: No (quicksort)
+
+[![Pixel Sorting visualization for each vertical line individually on cat](https://i.ytimg.com/vi/OemC9I967pw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDjariZ1gOdgCt3ORPmOOYJrFJWyw)](https://www.youtube.com/watch?v=OemC9I967pw)
 
 \- \- \-
 
