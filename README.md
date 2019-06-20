@@ -1,7 +1,7 @@
 Pixel Sorting
 ============
 
-A set of pixel sorting visualization using different methods on Processing.
+A set of pixel sorting visualization using different methods on Processing v3.
 This is my attempt to learn those sorting algorithm, but with something aesthetically pleasing. Those sketches with "Simple" on its name are the 1st attempt to understand the pixel sorting process and don't have or have limited visualization.
 Since we are talking about sorting pixels, there are lots of ways in doing that:
 - you can sort by hue, brightness, by the colour channel, saturation (HSB colour mode). So far I only did for hue and brightness.
