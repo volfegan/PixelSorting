@@ -96,10 +96,10 @@ Stable: No (quicksort)
 
 If you check the pixels sorted by a stable algorithm for the same image, they will be the same. The same image sorted by an unstable algorithm will result in different configurations. Check below the sunflower image sorted by brightness using the insertion and merge methods. They are the same:
 
-![sunflower](PixelMergeSortingSimple/data/sunflower400.jpg)
-![sunflower Pixels Sorted By brightness](PixelMergeSortingSimple/sunflower400_PixelsSortedBy_brightness.jpg)
+![sunflower Pixels Sorted By brightness insert sort](PixelInsertionSorting/sunflower400_PixelsSortedBy_brightness.jpg)
+![sunflower Pixels Sorted By brightness Merge sort](PixelMergeSortingSimple/sunflower400_PixelsSortedBy_brightness.jpg)
 
-Now compare the same image sorted respectively by quicksort and shellsort:
+Now compare the same image sorted respectively by quicksort and shellsort below:
 
 ![sunflower Pixels Sorted By brightness quicksort](PixelQuickSortingSimple/sunflower400_PixelsSortedBy_brightness.jpg)
 ![sunflower Pixels Sorted By brightness shellsort](PixelShellSortingSimple/sunflower400_PixelsSortedBy_brightness.jpg)
