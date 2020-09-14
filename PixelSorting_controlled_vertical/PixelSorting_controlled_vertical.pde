@@ -242,7 +242,7 @@ void draw() {
 
   //Show framerate on display
   if (saveFile == false) {
-    text("Sorting horizontal lines ("+sort_dir[Sorting_direction]+"): "
+    text("Sorting vertical lines ("+sort_dir[Sorting_direction]+"): "
       + String.format("%.2f", ( ((float)moveY)/(img.height-1) )*100) + "% / "
       + String.format("%.2f", frameRate) + " frameRate / sort by " + sortPixelMethod, 0, 18);
   } else {
